@@ -1,2 +1,2 @@
 # Pep9-Parser-ts
-A Parser for the Pep9 Assembler projetc
+Since the pep9 assembly language does'nt have nested parentheses, it is not necessary to use a grammar; thus, the parser will use a finite state machine;
