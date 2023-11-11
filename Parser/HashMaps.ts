@@ -27,21 +27,21 @@ export default class Maps {
         Maps.nonUnaryMnemonTable.set("ldwa", Mnemon.LDWA);
 
         Maps.mnemonStringTable = new Map<Mnemon, string>();
-        Maps.mnemonStringTable.set(Mnemon.STOP, "stop");
-        Maps.mnemonStringTable.set(Mnemon.ASLA, "asla");
-        Maps.mnemonStringTable.set(Mnemon.ASRA, "stop");
+        Maps.mnemonStringTable.set(Mnemon.STOP, "STOP");
+        Maps.mnemonStringTable.set(Mnemon.ASLA, "ASLA");
+        Maps.mnemonStringTable.set(Mnemon.ASRA, "ASRA");
 
-        Maps.mnemonStringTable.set(Mnemon.BR, "br");
-        Maps.mnemonStringTable.set(Mnemon.BRLT, "brlt");
-        Maps.mnemonStringTable.set(Mnemon.BREQ, "breq");
-        Maps.mnemonStringTable.set(Mnemon.BRLE, "brle");
-        Maps.mnemonStringTable.set(Mnemon.CPWA, "cpwa");
-        Maps.mnemonStringTable.set(Mnemon.DECI, "deci");
-        Maps.mnemonStringTable.set(Mnemon.DECO, "deco");
-        Maps.mnemonStringTable.set(Mnemon.ADDA, "adda");
-        Maps.mnemonStringTable.set(Mnemon.SUBA, "suba");
-        Maps.mnemonStringTable.set(Mnemon.STWA, "stwa");
-        Maps.mnemonStringTable.set(Mnemon.LDWA, "ldwa");
+        Maps.mnemonStringTable.set(Mnemon.BR, "BR");
+        Maps.mnemonStringTable.set(Mnemon.BRLT, "BRLT");
+        Maps.mnemonStringTable.set(Mnemon.BREQ, "BREQ");
+        Maps.mnemonStringTable.set(Mnemon.BRLE, "BRLE");
+        Maps.mnemonStringTable.set(Mnemon.CPWA, "CPWA");
+        Maps.mnemonStringTable.set(Mnemon.DECI, "DECI");
+        Maps.mnemonStringTable.set(Mnemon.DECO, "DECO");
+        Maps.mnemonStringTable.set(Mnemon.ADDA, "ADDA");
+        Maps.mnemonStringTable.set(Mnemon.SUBA, "SUBA");
+        Maps.mnemonStringTable.set(Mnemon.STWA, "STWA");
+        Maps.mnemonStringTable.set(Mnemon.LDWA, "LDWA");
     }
 
  

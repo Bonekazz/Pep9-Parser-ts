@@ -1,0 +1,15 @@
+{
+  "type": "module",
+  "name": "pep9-parser-ts",
+  "description": "Since the pep9 assembly language does'nt have nested parentheses, it is not necessary to use a grammar; thus, the parser will be based on a finite state machine;",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.9.0"
+  }
+}
