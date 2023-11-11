@@ -3,7 +3,7 @@ export default abstract class ACode {
     abstract generateListing(): string;
 }
 
-export class hieError extends ACode {
+export class hiError extends ACode {
     private errorMessage: string;
 
     constructor(errMessage: string) {
