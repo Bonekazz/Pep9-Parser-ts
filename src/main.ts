@@ -1,8 +1,8 @@
 import * as fs from 'node:fs'
-import { TInvalid, TEmpty } from './LexAnalyzer/Tokens';
-import Tokenizer from './LexAnalyzer/Tokenizer';
-import InBuffer from './LexAnalyzer/InBuffer';
-import AToken from './LexAnalyzer/Tokens';
+import { TInvalid, TEmpty } from './Lex-Analyzer/src/Tokens';
+import Tokenizer from './Lex-Analyzer/src/Tokenizer';
+import InBuffer from './Lex-Analyzer/src/InBuffer';
+import AToken from './Lex-Analyzer/src/Tokens';
 
 fs.readFile('./test/teste.txt', 'utf8', (err, data) => {
     if (err) {
