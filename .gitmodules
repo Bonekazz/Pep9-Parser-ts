@@ -1,0 +1,3 @@
+[submodule "src/Lex-Analyzer"]
+	path = src/Lex-Analyzer
+	url = https://github.com/Bonekazz/Pep9-Lex.Analyzer-ts.git
