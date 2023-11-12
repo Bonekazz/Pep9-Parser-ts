@@ -109,3 +109,16 @@ export class TSymbol extends AToken {
        return `Symbol               = ${this.symbol}` 
     }
 }
+
+export class TComment extends AToken {
+    private comment: string;
+
+    constructor(string: string) {
+        super();
+        this.comment = string;
+    }
+
+    getDescription(): string {
+       return `Comment              = ${this.comment}` 
+    }
+}
