@@ -5,6 +5,7 @@ export enum Mnemon {
 export default class Maps {
     static unaryMnemonTable: Map<string, Mnemon>;
     static nonUnaryMnemonTable: Map<string, Mnemon>;
+    static dotCommandsTable: Map<string, Mnemon>;
     static mnemonStringTable: Map<Mnemon, string>;
 
     constructor() {
@@ -13,6 +14,10 @@ export default class Maps {
         Maps.unaryMnemonTable.set("asla", Mnemon.ASLA);
         Maps.unaryMnemonTable.set("asra", Mnemon.ASRA);
 
+        Maps.dotCommandsTable = new Map<string, Mnemon>();
+        Maps.dotCommandsTable.set(".block", Mnemon.dotBLOCK);
+        Maps.dotCommandsTable.set(".end", Mnemon.dotEND);
+        
         Maps.nonUnaryMnemonTable = new Map<string, Mnemon>();
         Maps.nonUnaryMnemonTable.set("br", Mnemon.BR);
         Maps.nonUnaryMnemonTable.set("brlt", Mnemon.BRLT);
@@ -30,6 +35,9 @@ export default class Maps {
         Maps.mnemonStringTable.set(Mnemon.STOP, "STOP");
         Maps.mnemonStringTable.set(Mnemon.ASLA, "ASLA");
         Maps.mnemonStringTable.set(Mnemon.ASRA, "ASRA");
+
+        Maps.mnemonStringTable.set(Mnemon.dotBLOCK, ".BLOCK");
+        Maps.mnemonStringTable.set(Mnemon.dotEND, ".END");
 
         Maps.mnemonStringTable.set(Mnemon.BR, "BR");
         Maps.mnemonStringTable.set(Mnemon.BRLT, "BRLT");

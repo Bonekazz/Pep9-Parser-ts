@@ -1,6 +1,6 @@
-import InBuffer from './InBuffer.ts';
-import AToken, { TEmpty, TInvalid, TInteger, TIdentifier, THex, TDotCommand, TAddress } from './Tokens.ts'
-import Util, { LexState } from './Utils.ts'
+import InBuffer from './InBuffer';
+import AToken, { TEmpty, TInvalid, TInteger, TIdentifier, THex, TDotCommand, TAddress } from './Tokens'
+import Util, { LexState } from './Utils'
 
 
 export default class Tokenizer {
@@ -19,7 +19,7 @@ export default class Tokenizer {
         let state = LexState.START;
 
         do {
-            nextChar = this.b.advanceInput();
+            nextChar = this.b.returnAndAdvanceInput();
             switch (state) {
                 case LexState.START:
                     if (nextChar === "0") {
