@@ -1,5 +1,5 @@
 import InBuffer from './InBuffer';
-import AToken, { TEmpty, TInvalid, TInteger, TIdentifier, THex, TDotCommand, TAddress } from './Tokens'
+import AToken, { TEmpty, TInvalid, TInteger, TIdentifier, THex, TDotCommand, TAddress, TSymbol } from './Tokens'
 import Util, { LexState } from './Utils'
 
 
@@ -155,8 +155,20 @@ export default class Tokenizer {
                         break;
                     }
 
+                    if (nextChar === ":") {
+                        localStringValue += nextChar
+                        state = LexState.SYMBOL;
+                        break;
+                    }
+
                     this.b.backUpInput();
                     aToken = new TIdentifier(localStringValue);
+                    state = LexState.STOP;
+                    break;
+                case LexState.SYMBOL:
+
+                    this.b.backUpInput();
+                    aToken = new TSymbol(localStringValue.slice(0, -1));
                     state = LexState.STOP;
                     break;
 

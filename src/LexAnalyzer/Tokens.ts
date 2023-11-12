@@ -96,3 +96,16 @@ export class TAddress extends AToken {
        return `Addressing Mode      = ${this.adress}` 
     }
 }
+
+export class TSymbol extends AToken {
+    private symbol: string;
+
+    constructor(string: string) {
+        super();
+        this.symbol = string;
+    }
+
+    getDescription(): string {
+       return `Symbol               = ${this.symbol}` 
+    }
+}
