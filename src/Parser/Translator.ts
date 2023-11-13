@@ -1,9 +1,9 @@
-import ACode from "./ACode";
-import InBuffer from "../LexAnalyzer/InBuffer";
-import Tokenizer from "../LexAnalyzer/Tokenizer";
+import ACode, { EmptyInstruction } from "./ACode";
+import InBuffer from "../Lex-Analyzer/src/InBuffer";
+import Tokenizer from "../Lex-Analyzer/src/Tokenizer";
 import AArg, { IntArg } from "./AArg";
-import { Mnemon } from "./HashMaps";
-import AToken from "../LexAnalyzer/Tokens";
+import { DotCommand } from "./HashMaps";
+import AToken from "../Lex-Analyzer/src/Tokens";
 
 export enum ParseState{
     START,
@@ -12,7 +12,7 @@ export enum ParseState{
 export default class Translator {
     private buffer: InBuffer;
     private tokenizer: Tokenizer;
-    // private aCode: ACode;
+    private aCode = new EmptyInstruction();
 
     constructor(inbuffer: InBuffer) {
         this.buffer = inbuffer;
@@ -24,9 +24,9 @@ export default class Translator {
         let localFirstArg = new IntArg(0);
         let localSecondArg: AArg;
         // Compiler requires following useless initialization.
-        let localMnemon = Mnemon.dotEND;
+        let localMnemon = DotCommand.dotEND;
         let aToken: AToken;
-        // this.aCode = new EmptyInStr();
+        this.aCode = new EmptyInstruction();
         let state = ParseState.START;
 
 
