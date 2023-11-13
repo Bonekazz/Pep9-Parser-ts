@@ -3,7 +3,7 @@ export default abstract class AArg {
     abstract generateCode(): string;
 }
 
-export class IdentArg extends AArg {
+export class IdentifierArg extends AArg {
     private identValue: string;
     constructor(str: string) {
         super();
@@ -28,5 +28,18 @@ export class IntArg extends AArg {
 
     override generateCode(): string {
         return String(this.intValue);
+    }
+}
+
+export class HexArg extends AArg {
+    private hexValue: number;
+
+    constructor(hexNum: number) {
+        super();
+        this.hexValue = hexNum;
+    }
+
+    override generateCode(): string {
+        return String(this.hexValue);
     }
 }
