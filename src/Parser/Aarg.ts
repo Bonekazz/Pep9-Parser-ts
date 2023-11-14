@@ -7,9 +7,7 @@ export class IdentifierArg extends AArg {
     private identValue: string;
     constructor(str: string) {
         super();
-
         this.identValue = str;
-
     }
 
     override generateCode(): string {

@@ -56,44 +56,29 @@ export class UnaryInstruction extends ACode {
 
 }
 
-export class OneArgInstruction extends ACode {
-    private mnemonic: NonUnary;
-    private aArg: AArg;
+export class NonUnaryInstruction extends ACode {
+    private mnemonic: Unary | NonUnary;
+    private opEspeci: AArg;
+    private addrMode: AArg | undefined;
 
-    constructor(mn: NonUnary, aArg: AArg) {
+    constructor(mn: Unary | NonUnary, operand: AArg, addrmode?: AArg) {
         super();
         this.mnemonic = mn;
-        this.aArg = aArg;
+        this.opEspeci = operand;
+        this.addrMode = addrmode;
     }
 
     override generateListing(): string {
-       return `${Maps.mnemonStringTable.get(this.mnemonic)} ${this.aArg.generateCode()}` 
+        if (this.mnemonic in Unary) {
+            return `${Maps.mnemonStringTable.get(this.mnemonic)} ${this.opEspeci.generateCode()}`
+        }
+        
+        return `${Maps.mnemonStringTable.get(this.mnemonic)} ${this.opEspeci.generateCode()}, ${Maps.mnemonStringTable.get(this.addrMode)}`
+
     }
 
     override generateCode(): string {
-        return "";
-    }
-
-}
-
-export class TwoArgInstruction extends ACode {
-    private mnemonic: NonUnary;
-    private firstArg: AArg;
-    private secondArg: AArg;
-
-    constructor(mn: NonUnary, fArg: AArg, sArg: AArg) {
-        super();
-        this.mnemonic = mn;
-        this.firstArg = fArg;
-        this.secondArg = sArg;
-    }
-
-    override generateListing(): string {
-        return `${Maps.mnemonStringTable.get(this.mnemonic)} ${this.firstArg.generateCode()}, ${this.secondArg.generateCode()}`;
-    }
-
-    override generateCode(): string {
-        return "";
+        return ""; 
     }
 
 }
