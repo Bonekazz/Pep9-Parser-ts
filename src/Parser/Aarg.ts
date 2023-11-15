@@ -38,6 +38,6 @@ export class HexArg extends AArg {
     }
 
     override generateCode(): string {
-        return String(this.hexValue);
+        return this.hexValue.toString(16).toUpperCase();
     }
 }

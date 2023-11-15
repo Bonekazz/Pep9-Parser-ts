@@ -1,5 +1,5 @@
-import AArg, { IdentifierArg } from "./AArg";
-import Maps, { Unary, NonUnary, DotCommand, AddressingMode } from "./HashMaps";
+import AArg, { HexArg, IdentifierArg } from "./AArg";
+import Maps, { Unary, NonUnary1, NonUnary2, DotCommand, AddressingMode } from "./HashMaps";
 
 export default abstract class ACode {
     abstract generateListing(): string;
@@ -57,11 +57,11 @@ export class UnaryInstruction extends ACode {
 }
 
 export class NonUnaryInstruction extends ACode {
-    private mnemonic: Unary | NonUnary;
+    private mnemonic: NonUnary1 | NonUnary2;
     private opEspeci: AArg;
     private addrMode: AArg | undefined;
 
-    constructor(mn: Unary | NonUnary, operand: AArg, addrmode?: AArg) {
+    constructor(mn: NonUnary1 | NonUnary2, operand: AArg, addrmode?: AArg) {
         super();
         this.mnemonic = mn;
         this.opEspeci = operand;
@@ -69,11 +69,15 @@ export class NonUnaryInstruction extends ACode {
     }
 
     override generateListing(): string {
-        if (this.mnemonic in Unary) {
-            return `${Maps.mnemonStringTable.get(this.mnemonic)} ${this.opEspeci.generateCode()}`
+        if (this.mnemonic in NonUnary1) {
+            return `${Maps.mnemonStringTable.get(this.mnemonic)}    ${this.opEspeci.generateCode()}`
+        }
+
+        if (this.opEspeci instanceof HexArg) {
+            return`${Maps.mnemonStringTable.get(this.mnemonic)}    0x${this.opEspeci.generateCode()}, ${Maps.mnemonStringTable.get(this.addrMode)}`
         }
         
-        return `${Maps.mnemonStringTable.get(this.mnemonic)} ${this.opEspeci.generateCode()}, ${Maps.mnemonStringTable.get(this.addrMode)}`
+        return `${Maps.mnemonStringTable.get(this.mnemonic)}    ${this.opEspeci.generateCode()}, ${Maps.mnemonStringTable.get(this.addrMode)}`
 
     }
 
