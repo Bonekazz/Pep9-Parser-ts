@@ -1,5 +1,5 @@
 import AArg, { HexArg, IdentifierArg } from "./AArg";
-import Maps, { Unary, NonUnary1, NonUnary2, DotCommand, AddressingMode } from "./HashMaps";
+import Maps, { Unary, NonUnary1, NonUnary2} from "./HashMaps";
 
 export default abstract class ACode {
     abstract generateListing(): string;
@@ -39,9 +39,9 @@ export class EmptyInstruction extends ACode {
 }
 
 export class UnaryInstruction extends ACode {
-    private mnemonic: Unary;
+    private mnemonic: Unary | undefined;
 
-    constructor(mn: Unary) {
+    constructor(mn: Unary | undefined) {
         super();
         this.mnemonic = mn;
     }
