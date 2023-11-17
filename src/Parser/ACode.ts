@@ -47,7 +47,7 @@ export class UnaryInstruction extends ACode {
     }
 
     override generateListing(): string {
-        return `${Maps.mnemonStringTable.get(this.mnemonic)}\n`;
+        return `${Maps.unaryStringTable.get(this.mnemonic)}\n`;
     }
 
     override generateCode(): string {
@@ -57,7 +57,7 @@ export class UnaryInstruction extends ACode {
 }
 
 export class NonUnaryInstruction extends ACode {
-    private mnemonic: NonUnary1 | NonUnary2;
+    private mnemonic: any;
     private opEspeci: AArg;
     private addrMode: AArg | undefined;
 
@@ -70,14 +70,10 @@ export class NonUnaryInstruction extends ACode {
 
     override generateListing(): string {
         if (this.mnemonic in NonUnary1) {
-            return `${Maps.mnemonStringTable.get(this.mnemonic)}    ${this.opEspeci.generateCode()}`
+            return `${Maps.nonUnary1StringTable.get(this.mnemonic)}    ${this.opEspeci.generateCode()}`
         }
 
-        if (this.opEspeci instanceof HexArg) {
-            return`${Maps.mnemonStringTable.get(this.mnemonic)}    0x${this.opEspeci.generateCode()}, ${Maps.mnemonStringTable.get(this.addrMode)}`
-        }
-        
-        return `${Maps.mnemonStringTable.get(this.mnemonic)}    ${this.opEspeci.generateCode()}, ${Maps.mnemonStringTable.get(this.addrMode)}`
+        return`${Maps.nonUnary2StringTable.get(this.mnemonic)}    0x${this.opEspeci.generateCode()}, ${Maps.addrModeStringTable.get(this.addrMode)}`
 
     }
 
