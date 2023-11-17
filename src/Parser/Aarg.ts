@@ -41,3 +41,16 @@ export class HexArg extends AArg {
         return this.hexValue.toString(16).toUpperCase();
     }
 }
+
+export class AddrModeArg extends AArg {
+    private addrMode: string;
+
+    constructor(mode: string) {
+        super();
+        this.addrMode = mode;
+    }
+
+    override generateCode(): string {
+        return this.addrMode;    
+    }
+}
