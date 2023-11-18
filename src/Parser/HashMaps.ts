@@ -1,17 +1,17 @@
 export enum Unary {
-    STOP, ASLA, ASRA, dotBLOCK, dotEND
+    STOP, ASLA, ASRA, dotEND
 }
 
 export enum NonUnary1 {
-    BR, BRLT, BREQ, BRLE, CPWA, SUBA
+    BR = 4, BRLT, BREQ, BRLE, CPWA, SUBA, dotBLOCK
 }
 
 export enum NonUnary2 {
-    DECI, DECO, ADDA, STWA, LDWA
+    DECI = 11, DECO, ADDA, STWA, LDWA
 }
 
 export enum AddressingMode {
-    addI, addD, addN, addS, addSF, addX, addSX, addSFX
+    addI = 16, addD, addN, addS, addSF, addX, addSX, addSFX
 }
 
 
@@ -39,9 +39,9 @@ export default class Maps {
         Maps.unaryMnemonTable.set("stop", Unary.STOP);
         Maps.unaryMnemonTable.set("asla", Unary.ASLA);
         Maps.unaryMnemonTable.set("asra", Unary.ASRA);
-        Maps.unaryMnemonTable.set(".block", Unary.dotBLOCK);
         Maps.unaryMnemonTable.set(".end", Unary.dotEND);
 
+        Maps.nonUnary1MnemonTable.set(".block", NonUnary1.dotBLOCK);
         Maps.nonUnary1MnemonTable.set("br", NonUnary1.BR);
         Maps.nonUnary1MnemonTable.set("brlt", NonUnary1.BRLT);
         Maps.nonUnary1MnemonTable.set("breq", NonUnary1.BREQ);
@@ -67,10 +67,11 @@ export default class Maps {
 
         Maps.unaryStringTable.set(Unary.STOP, "STOP");
         Maps.unaryStringTable.set(Unary.ASLA, "ASLA");
-        Maps.unaryStringTable.set(Unary.ASRA, "ASRA");
-        Maps.unaryStringTable.set(Unary.dotBLOCK, ".BLOCK");
+        Maps.unaryStringTable.set(Unary.ASRA, "ASRA"); 
         Maps.unaryStringTable.set(Unary.dotEND, ".END");
 
+
+        Maps.nonUnary1StringTable.set(NonUnary1.dotBLOCK, ".BLOCK")
         Maps.nonUnary1StringTable.set(NonUnary1.BR, "BR");
         Maps.nonUnary1StringTable.set(NonUnary1.BRLT, "BRLT");
         Maps.nonUnary1StringTable.set(NonUnary1.BREQ, "BREQ");
