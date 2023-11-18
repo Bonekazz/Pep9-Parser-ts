@@ -3,7 +3,7 @@ import InBuffer from "../Lex-Analyzer/src/InBuffer";
 import Tokenizer from "../Lex-Analyzer/src/Tokenizer";
 import AArg, { AddrModeArg, HexArg, IdentifierArg, IntArg } from "./AArg";
 import { AddressingMode, NonUnary1, NonUnary2, Unary } from "./HashMaps";
-import AToken, { TAddress, TEmpty, THex, TIdentifier, TInteger } from "../Lex-Analyzer/src/Tokens";
+import AToken, { TAddress, TDotCommand, TEmpty, THex, TIdentifier, TInteger } from "../Lex-Analyzer/src/Tokens";
 import Maps from "./HashMaps"
 
 export enum ParseState{
@@ -25,7 +25,6 @@ export default class Translator {
         let terminate = false;
         let localFirstArg: any = new HexArg(0);
         let localSecondArg: any = new IdentifierArg("");
-        let tempString: string;
         // Compiler requires following useless initialization.
         let localMnemon: any = Unary.dotEND;
         let aToken: AToken;
@@ -36,8 +35,8 @@ export default class Translator {
             aToken = this.tokenizer.getToken();
             switch (state) {
                 case ParseState.START:
-                    if (aToken instanceof TIdentifier) {
-                        tempString = aToken.getStringValue().toLowerCase();
+                    if (aToken instanceof TIdentifier || aToken instanceof TDotCommand) {
+                        let tempString = aToken.getStringValue().toLowerCase();
 
                         if (Maps.unaryMnemonTable.has(tempString)) {
                             localMnemon = Maps.unaryMnemonTable.get(tempString);
@@ -88,6 +87,12 @@ export default class Translator {
                         state = ParseState.PARAM1;
                         break;
                     }
+
+                    if (aToken instanceof TInteger) {
+                        localFirstArg = new IntArg(aToken.getIntValue());
+                        state = ParseState.PARAM1;
+                        break;
+                    }
                     
                     this.aCode = new hiError("invalid parameter");
                     break;
@@ -99,9 +104,19 @@ export default class Translator {
                         break;
                     }
 
-                    if (aToken instanceof TAddress) {
-                        localSecondArg = new AddrModeArg(aToken.getStringValue())
-                        state = ParseState.PARAM2;
+                    if (aToken instanceof TAddress && localMnemon in NonUnary2) {
+                        if (Maps.adressignModeTable.has(aToken.getStringValue())) {
+                            localSecondArg = new AddrModeArg(aToken.getStringValue());
+                            state = ParseState.PARAM2;
+                            break;
+                        }
+
+                        this.aCode = new hiError("invalid addressing mode");
+                        break; 
+                    }
+                    
+                    if (aToken instanceof TAddress && localMnemon in NonUnary1) {
+                        this.aCode = new hiError("this instruction does not accept addressing modes")
                         break;
                     }
 
@@ -152,12 +167,12 @@ export default class Translator {
             numErrors++;
         }
 
-        if (numErrors == 0) {
-            console.log("Object code:\n");
-            for (let i = 0; i < codeTable.length; i++) {
-                console.log(`${codeTable[ i ].generateCode()}`);
-            }
-        }
+        // if (numErrors == 0) {
+        //     console.log("Object code:\n");
+        //     for (let i = 0; i < codeTable.length; i++) {
+        //         console.log(`${codeTable[ i ].generateCode()}`);
+        //     }
+        // }
 
         if (numErrors == 1) {
             console.log("One error was detected.\n");
@@ -167,10 +182,12 @@ export default class Translator {
             console.log(`${numErrors} errors were detected.\n`);
         }
 
-        console.log("\nProgram listing:\n");
+        console.log("> Program listing:\n");
         for (let i = 0; i < codeTable.length; i++) {
             console.log(`${codeTable[ i ].generateListing()}`);
         }
+
+        console.log(codeTable)
     }
 
 }
