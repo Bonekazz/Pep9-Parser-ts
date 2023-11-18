@@ -1,4 +1,4 @@
-import AArg, { HexArg, IdentifierArg, IntArg } from "./AArg";
+import AArg, { IntArg } from "./AArg";
 import Maps, { Unary, NonUnary1, NonUnary2} from "./HashMaps";
 
 export default abstract class ACode {
