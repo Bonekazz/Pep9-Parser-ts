@@ -187,6 +187,7 @@ export default class Translator {
             console.log(`${codeTable[ i ].generateListing()}`);
         }
 
+        console.log("\n> Debug Codes:");
         console.log(codeTable)
     }
 
