@@ -1,5 +1,5 @@
-import AArg, { IntArg } from "./AArg";
-import Maps, { Unary, NonUnary1, NonUnary2} from "./HashMaps";
+import AArg, { AddrModeArg, IntArg } from "./AArg";
+import Maps, { Unary, NonUnary1, NonUnary2, AddressingMode} from "./HashMaps";
 
 export default abstract class ACode {
     abstract generateListing(): string;
@@ -15,7 +15,7 @@ export class hiError extends ACode {
     }
 
     override generateListing(): string {
-        return `ERROR: ${this.errorMessage}\n`
+        return `[ERROR]--> ${this.errorMessage}\n`
         
     }
 
@@ -69,7 +69,7 @@ export class NonUnaryInstruction extends ACode {
         this.mnemonic = mn;
         this.stringMnemonic = Maps.nonUnary1StringTable.get(this.mnemonic) || Maps.nonUnary2StringTable.get(this.mnemonic);        
         this.opEspeci = operand;
-        this.addrMode = addrmode;
+        this.addrMode = addrmode || new AddrModeArg("i");
         
     }
 
