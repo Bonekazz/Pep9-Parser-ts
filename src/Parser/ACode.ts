@@ -1,5 +1,5 @@
-import AArg, { AddrModeArg, IntArg } from "./AArg";
-import Maps, { Unary, NonUnary1, NonUnary2, AddressingMode} from "./HashMaps";
+import AArg, { AddrModeArg, HexArg, IntArg } from "./AArg";
+import Maps, { Unary, NonUnary} from "./HashMaps";
 
 export default abstract class ACode {
     abstract generateListing(): string;
@@ -64,28 +64,31 @@ export class NonUnaryInstruction extends ACode {
     private opEspeci: AArg;
     private addrMode: any;
 
-    constructor(mn: NonUnary1 | NonUnary2, operand: AArg, addrmode?: AArg) {
+    constructor(mn: NonUnary, operand: AArg, addrmode?: AArg) {
         super();
         this.mnemonic = mn;
-        this.stringMnemonic = Maps.nonUnary1StringTable.get(this.mnemonic) || Maps.nonUnary2StringTable.get(this.mnemonic);        
+        this.stringMnemonic = Maps.nonUnaryStringTable.get(this.mnemonic);      
         this.opEspeci = operand;
         this.addrMode = addrmode || new AddrModeArg("i");
         
     }
 
     override generateListing(): string {
-        if (this.mnemonic in NonUnary1) {
-            if (this.opEspeci instanceof IntArg) {
-                return `${Maps.nonUnary1StringTable.get(this.mnemonic)}    ${this.opEspeci.generateCode()}`
-            }
-            return `${Maps.nonUnary1StringTable.get(this.mnemonic)}    0x${this.opEspeci.generateCode()}`
-        }
 
+        let text = `${Maps.nonUnaryStringTable.get(this.mnemonic)}`;
         if (this.opEspeci instanceof IntArg) {
-            return `${Maps.nonUnary2StringTable.get(this.mnemonic)}    ${this.opEspeci.generateCode()}, ${this.addrMode.generateCode()}`
+            text += `   ${this.opEspeci.generateCode()}`
         }
 
-        return `${Maps.nonUnary2StringTable.get(this.mnemonic)}    0x${this.opEspeci.generateCode()}, ${this.addrMode.generateCode()}`
+        if (this.opEspeci instanceof HexArg) {
+            text += `   0x${this.opEspeci.generateCode()}`
+        }
+
+        if (this.mnemonic !== NonUnary.dotBLOCK && this.mnemonic !== NonUnary.BR) {
+            text += `, ${this.addrMode.generateCode()}`
+        }
+
+        return text;
         
 
     }
