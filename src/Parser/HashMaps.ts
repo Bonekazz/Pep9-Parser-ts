@@ -14,25 +14,43 @@ export enum AddressingMode {
 export default class Maps {
     static unaryMnemonTable: Map<string, any>;
     static nonUnaryMnemonTable: Map<string, any>;
-    static adressignModeTable: Map<string, any>
     static unaryStringTable: Map<any, string>;
     static nonUnaryStringTable: Map<any, string>;
+
+    static adressignModeTable: Map<string, any>
     static addrModeStringTable: Map<any, string>;
+
+    static unaryCodeTable: Map<any, number | string>;
+    static nonUnaryCodeTable: Map<any, number>;
 
     static {
         Maps.unaryMnemonTable = new Map<string, any>();
         Maps.nonUnaryMnemonTable = new Map<string, any>();
-        Maps.adressignModeTable = new Map<string, any>();
-
         Maps.unaryStringTable = new Map<any, string>();
         Maps.nonUnaryStringTable = new Map<any, string>();
+
+        Maps.adressignModeTable = new Map<string, any>();
         Maps.addrModeStringTable = new Map<any, string>();
+
+        Maps.unaryCodeTable = new Map<any, number | string>();
+        Maps.nonUnaryCodeTable = new Map<any, number>();
+
+        // UNARIES CODE TABLE SETS
+        Maps.unaryCodeTable.set(Unary.STOP, 0);
+        Maps.unaryCodeTable.set(Unary.ASLA, 4113);
+        Maps.unaryCodeTable.set(Unary.ASRA, 4353);
+        Maps.unaryCodeTable.set(Unary.dotEND, "zz");
+
+        // NON UNARIES CODE TABLE SETS
+        Maps.nonUnaryCodeTable.set(NonUnary.BR, 4097);
         
+        // UNARY MNEMONS TABLE SETS
         Maps.unaryMnemonTable.set("stop", Unary.STOP);
         Maps.unaryMnemonTable.set("asla", Unary.ASLA);
         Maps.unaryMnemonTable.set("asra", Unary.ASRA);
         Maps.unaryMnemonTable.set(".end", Unary.dotEND);
 
+        // NON UNARY MNEMONS TABLE SETS
         Maps.nonUnaryMnemonTable.set(".block", NonUnary.dotBLOCK);
         Maps.nonUnaryMnemonTable.set("br", NonUnary.BR);
         Maps.nonUnaryMnemonTable.set("brlt", NonUnary.BRLT);
@@ -46,6 +64,7 @@ export default class Maps {
         Maps.nonUnaryMnemonTable.set("stwa", NonUnary.STWA);
         Maps.nonUnaryMnemonTable.set("ldwa", NonUnary.LDWA);
 
+        // ADDRESSING TABLE SETS
         Maps.adressignModeTable.set("i", AddressingMode.addI);
         Maps.adressignModeTable.set("d", AddressingMode.addD);
         Maps.adressignModeTable.set("n", AddressingMode.addN);
@@ -55,12 +74,13 @@ export default class Maps {
         Maps.adressignModeTable.set("sx", AddressingMode.addSX);
         Maps.adressignModeTable.set("sfx", AddressingMode.addSFX);
 
+        // UNARIES STRING TABLE
         Maps.unaryStringTable.set(Unary.STOP, "STOP");
         Maps.unaryStringTable.set(Unary.ASLA, "ASLA");
         Maps.unaryStringTable.set(Unary.ASRA, "ASRA"); 
         Maps.unaryStringTable.set(Unary.dotEND, ".END");
 
-
+        // NON UNARIES STRING TABLE
         Maps.nonUnaryStringTable.set(NonUnary.dotBLOCK, ".BLOCK")
         Maps.nonUnaryStringTable.set(NonUnary.BR, "BR");
         Maps.nonUnaryStringTable.set(NonUnary.BRLT, "BRLT");
@@ -75,6 +95,7 @@ export default class Maps {
         Maps.nonUnaryStringTable.set(NonUnary.DECO, "DECO");
         Maps.nonUnaryStringTable.set(NonUnary.ADDA, "ADDA");
 
+        // ADDRESSINGS STRING TABLE
         Maps.addrModeStringTable.set(AddressingMode.addI, "i");
         Maps.addrModeStringTable.set(AddressingMode.addD, "d");
         Maps.addrModeStringTable.set(AddressingMode.addN, "n");
