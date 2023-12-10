@@ -20,8 +20,9 @@ export default class Maps {
     static adressignModeTable: Map<string, any>
     static addrModeStringTable: Map<any, string>;
 
-    static unaryCodeTable: Map<any, string>;
-    static nonUnaryCodeTable: Map<any, string>;
+    static unaryCodeTable: Map<any, any>;
+    static nonUnaryCodeTable: Map<any, any>;
+    static addrModeCodeTable:  Map<any, any>;
 
     static {
         Maps.unaryMnemonTable = new Map<string, any>();
@@ -32,28 +33,29 @@ export default class Maps {
         Maps.adressignModeTable = new Map<string, any>();
         Maps.addrModeStringTable = new Map<any, string>();
 
-        Maps.unaryCodeTable = new Map<any, string>();
-        Maps.nonUnaryCodeTable = new Map<any, string>();
+        Maps.unaryCodeTable = new Map<any, any>();
+        Maps.nonUnaryCodeTable = new Map<any, any>();
+        Maps.addrModeCodeTable = new Map<any, any>();
 
         // UNARIES CODE TABLE SETS
-        Maps.unaryCodeTable.set(Unary.STOP, "00");
-        Maps.unaryCodeTable.set(Unary.ASLA, "0A");
-        Maps.unaryCodeTable.set(Unary.ASRA, "0C");
+        Maps.unaryCodeTable.set(Unary.STOP, 0);
+        Maps.unaryCodeTable.set(Unary.ASLA, 10);
+        Maps.unaryCodeTable.set(Unary.ASRA, 12);
         Maps.unaryCodeTable.set(Unary.dotEND, "zz");
 
         // NON UNARIES CODE TABLE SETS
-        Maps.nonUnaryCodeTable.set(NonUnary.BR, "12");
-        Maps.nonUnaryCodeTable.set(NonUnary.BRLT, "16");
-        Maps.nonUnaryCodeTable.set(NonUnary.BREQ, "18");
-        Maps.nonUnaryCodeTable.set(NonUnary.BRLE, "14");
-        Maps.nonUnaryCodeTable.set(NonUnary.CPWA, "A0");
-        Maps.nonUnaryCodeTable.set(NonUnary.SUBA, "70");
+        Maps.nonUnaryCodeTable.set(NonUnary.BR, 18);
+        Maps.nonUnaryCodeTable.set(NonUnary.BRLT, 22);
+        Maps.nonUnaryCodeTable.set(NonUnary.BREQ, 24);
+        Maps.nonUnaryCodeTable.set(NonUnary.BRLE, 20);
+        Maps.nonUnaryCodeTable.set(NonUnary.CPWA, 160);
+        Maps.nonUnaryCodeTable.set(NonUnary.SUBA, 112);
         // .block?
-        Maps.nonUnaryCodeTable.set(NonUnary.DECI, "31");
-        Maps.nonUnaryCodeTable.set(NonUnary.DECO, "39");
-        Maps.nonUnaryCodeTable.set(NonUnary.ADDA, "60");
-        Maps.nonUnaryCodeTable.set(NonUnary.STWA, "E1");
-        Maps.nonUnaryCodeTable.set(NonUnary.LDWA, "C0");
+        Maps.nonUnaryCodeTable.set(NonUnary.DECI, 48);
+        Maps.nonUnaryCodeTable.set(NonUnary.DECO, 56);
+        Maps.nonUnaryCodeTable.set(NonUnary.ADDA, 96);
+        Maps.nonUnaryCodeTable.set(NonUnary.STWA, 224);
+        Maps.nonUnaryCodeTable.set(NonUnary.LDWA, 192);
         
         // UNARY MNEMONS TABLE SETS
         Maps.unaryMnemonTable.set("stop", Unary.STOP);
