@@ -156,12 +156,12 @@ export default class Translator {
             numErrors++;
         }
 
-        // if (numErrors == 0) {
-        //     console.log("Object code:\n");
-        //     for (let i = 0; i < codeTable.length; i++) {
-        //         console.log(`${codeTable[ i ].generateCode()}`);
-        //     }
-        // }
+        if (numErrors == 0) {
+            console.log("Object code:\n");
+            for (let i = 0; i < codeTable.length; i++) {
+                console.log(`${codeTable[ i ].generateCode()}`);
+            }
+        }
 
         if (numErrors == 1) {
             console.log("One error was detected.\n");
@@ -176,8 +176,8 @@ export default class Translator {
             console.log(`${codeTable[ i ].generateListing()}`);
         }
 
-        console.log("\n> Debug Codes:");
-        console.log(codeTable)
+        // console.log("\n> Debug Codes:");
+        // console.log(codeTable)
     }
 
 }
