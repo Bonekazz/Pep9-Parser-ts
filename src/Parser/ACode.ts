@@ -1,5 +1,5 @@
 import AArg, { AddrModeArg, HexArg, IntArg } from "./AArg";
-import Maps, { Unary, NonUnary} from "./HashMaps";
+import Maps, { Unary, NonUnary, AddressingMode} from "./HashMaps";
 
 export default abstract class ACode {
     abstract generateListing(): string;
@@ -53,7 +53,11 @@ export class UnaryInstruction extends ACode {
     }
 
     override generateCode(): string {
-        return "";
+        if (this.mnemonic === Unary.dotEND) {
+            return `${Maps.unaryCodeTable.get(this.mnemonic)}`
+        }
+
+        return `${Maps.unaryCodeTable.get(this.mnemonic)}`
     }
 
 }
@@ -94,7 +98,11 @@ export class NonUnaryInstruction extends ACode {
     }
 
     override generateCode(): string {
-        return ""; 
+        if (this.mnemonic === NonUnary.dotBLOCK) {
+            return ".block later"
+        }
+
+        return `${(Maps.nonUnaryCodeTable.get(this.mnemonic) + Maps.adressignModeTable.get(this.addrMode.generateCode())).toString(16).toLowerCase()} ${Number(this.opEspeci.generateCode()).toString(16)}` 
     }
 
 }
