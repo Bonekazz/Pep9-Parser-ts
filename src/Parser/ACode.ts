@@ -1,3 +1,4 @@
+import decToHex from "../utils/hexParser";
 import AArg, { AddrModeArg, HexArg, IntArg } from "./AArg";
 import Maps, { Unary, NonUnary, AddressingMode} from "./HashMaps";
 
@@ -85,7 +86,7 @@ export class NonUnaryInstruction extends ACode {
         }
 
         if (this.opEspeci instanceof HexArg) {
-            text += `   0x${this.opEspeci.generateCode()}`
+            text += `   0x${decToHex(Number(this.opEspeci.generateCode()))}`
         }
 
         if (this.mnemonic !== NonUnary.dotBLOCK && this.mnemonic !== NonUnary.BR) {
@@ -102,7 +103,7 @@ export class NonUnaryInstruction extends ACode {
             return ".block later"
         }
 
-        return `${(Maps.nonUnaryCodeTable.get(this.mnemonic) + Maps.adressignModeTable.get(this.addrMode.generateCode())).toString(16).toLowerCase()} ${Number(this.opEspeci.generateCode()).toString(16)}` 
+        return `${(Maps.nonUnaryCodeTable.get(this.mnemonic) + Maps.adressignModeTable.get(this.addrMode.generateCode())).toString(16).toUpperCase()} ${decToHex(Number(this.opEspeci.generateCode()))}` 
     }
 
 }
