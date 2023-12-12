@@ -38,11 +38,7 @@ export class HexArg extends AArg {
     }
 
     override generateCode(): string {
-        let hex = this.hexValue.toString(16).toUpperCase();
-        while (hex.length < 4) {
-            hex = '0' + hex;
-        }
-        return hex;
+        return String(this.hexValue)
     }
 }
 
