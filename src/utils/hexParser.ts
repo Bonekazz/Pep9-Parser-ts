@@ -1,12 +1,25 @@
+export default function decToHex(num: number): string {
+    let negative = false;
+    if (num < 0) {
+        negative = true;
+        num = num - (num * 2)
+    }
 
     let result = "";
-    let quot = 450;
-    let buffer = [];
+    let quot = num;
 
-    while (quot !== 0) {
-        buffer.push((quot % 16).toString(16));
+    do {
+        result = (quot % 16).toString(16) + result
         quot = Math.floor(quot / 16);
-        console.log(quot)
-        console.log(buffer)  
-    } 
-    console.log(buffer)
+    } while (quot !== 0)
+
+    while (result.length < 4) {
+        result = '0' + result
+    }
+
+    if (negative === true) {
+        return String(0xFFFF - Number(`0x${result}`) + 1)
+    }
+
+    return result;
+}
