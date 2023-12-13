@@ -13,12 +13,8 @@ export default function decToHex(num: number): string {
         quot = Math.floor(quot / 16);
     } while (quot !== 0)
 
-    while (result.length < 4) {
-        result = '0' + result
-    }
-
     if (negative === true) {
-        return String(0xFFFF - Number(`0x${result}`) + 1)
+        return (0xFFFF - Number(`0x${result}`) + 1).toString(16);
     }
 
     return result;
