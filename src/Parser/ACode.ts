@@ -1,4 +1,5 @@
 import decToHex from "../utils/hexParser";
+import twoComplement, { halfTwoComplement } from "../utils/twoComplement";
 import AArg, { AddrModeArg, HexArg, IntArg } from "./AArg";
 import Maps, { Unary, NonUnary, AddressingMode} from "./HashMaps";
 
@@ -58,7 +59,7 @@ export class UnaryInstruction extends ACode {
             return `${Maps.unaryCodeTable.get(this.mnemonic)}`
         }
 
-        return `${Maps.unaryCodeTable.get(this.mnemonic)}`
+        return `${halfTwoComplement((Maps.unaryCodeTable.get(this.mnemonic).toString(16)))}`
     }
 
 }
@@ -86,7 +87,7 @@ export class NonUnaryInstruction extends ACode {
         }
 
         if (this.opEspeci instanceof HexArg) {
-            text += `   0x${decToHex(Number(this.opEspeci.generateCode()))}`
+            text += `   0x${twoComplement(decToHex(Number(this.opEspeci.generateCode())))}`
         }
 
         if (this.mnemonic !== NonUnary.dotBLOCK && this.mnemonic !== NonUnary.BR) {
@@ -99,11 +100,23 @@ export class NonUnaryInstruction extends ACode {
     }
 
     override generateCode(): string {
+        const opNum = Number(this.opEspeci.generateCode())
         if (this.mnemonic === NonUnary.dotBLOCK) {
-            return ".block later"
+            let blockCode = "";
+            for (let i = 0; i < opNum; i++){
+                if (i === (opNum - 1)) {
+                    blockCode += "00"
+                } else {
+                    blockCode += "00 "
+                }
+            }
+            return blockCode;
         }
+        const hexString = decToHex(opNum)
+        let leftSide = halfTwoComplement(Math.floor(Number(`0x${hexString}`) / 256).toString(16))
+        let rightSide = halfTwoComplement(Math.floor(Number(`0x${hexString}`) % 256).toString(16))
 
-        return `${(Maps.nonUnaryCodeTable.get(this.mnemonic) + Maps.adressignModeTable.get(this.addrMode.generateCode())).toString(16).toUpperCase()} ${decToHex(Number(this.opEspeci.generateCode()))}` 
+        return `${(Maps.nonUnaryCodeTable.get(this.mnemonic) + Maps.adressignModeTable.get(this.addrMode.generateCode())).toString(16).toUpperCase()} ${leftSide} ${rightSide}` 
     }
 
 }
