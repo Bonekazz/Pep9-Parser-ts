@@ -1,8 +1,7 @@
 # Pep9 Parser
-[porject still in production]
-> [!NOTE]
-> Since the pep9 assembly language does'nt have nested parentheses, it is not necessary to use a grammar; hence, the Parser is based on a finite state machine;
+
+Project from the Computer Systems class, lectured by the Pepperdine University professor (Stan Warford)[https://cslab.pepperdine.edu/warford/index.html] and posted at his [youtube channel](https://www.youtube.com/watch?v=3XipSI9ZzJA&list=PL9o9lNrP1luVQoR25mdOPP2yKyhNLLK0W).
 
 ## TODO:
-    [] - enable symbols
-    [] - enable comments
+    [] - implement symbols
+    [] - implement comments
